@@ -1,0 +1,29 @@
+{
+  "name": "xbash",
+  "version": "1.0.0",
+  "description": "User-friendly and cross-platform bash command wrapper.",
+  "dependencies": {
+    "which": "^1.3.1"
+  },
+  "bin": {
+    "xbash": "xbash.js"
+  },
+  "files": [
+    "xbash.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mortend/xbash.git"
+  },
+  "keywords": [
+    "cross-platform",
+    "bash",
+    "command"
+  ],
+  "author": "Morten Daniel Fornes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mortend/xbash/issues"
+  },
+  "homepage": "https://github.com/mortend/xbash#readme"
+}
