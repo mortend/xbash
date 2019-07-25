@@ -6,16 +6,21 @@
     "which": "^1.3.1"
   },
   "bin": {
-    "xbash": "xbash.js"
+    "xbash": "cli.js"
+  },
+  "scripts": {
+    "test": "node test.js"
   },
   "files": [
-    "xbash.js"
+    "cli.js",
+    "index.js"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mortend/xbash.git"
   },
   "keywords": [
+    "user-friendly",
     "cross-platform",
     "bash",
     "command"

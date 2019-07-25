@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
 const which = require('which');
@@ -35,8 +34,7 @@ if (path.sep == '\\') {
         .concat(path.delimiter, process.env.PATH);
 }
 
-spawn(bash, process.argv.splice(2), {
-    stdio: 'inherit'
-}).on('exit', function(code) {
-    process.exit(code);
-});
+module.exports = (args, callback) => 
+    spawn(bash, args, {
+        stdio: 'inherit'
+    }).on('exit', callback);

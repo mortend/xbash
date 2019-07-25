@@ -13,8 +13,17 @@ npm install xbash -g
 
 ## Usage
 
+```js
+const xbash = require('./');
+
+xbash(['-c', 'echo Hello World!'], process.exit);
+```
+
+or, in Terminal:
+
 ```
 $ xbash --version
+
 ERROR: Bash was not found. This can be solved by installing Git.
 
 Please get Git from https://git-scm.com/downloads and try again.
@@ -24,6 +33,7 @@ After installing [Git for Windows](https://git-scm.com/downloads):
 
 ```
 $ xbash --version
+
 GNU bash, version 4.4.23(1)-release (x86_64-pc-msys)
 Copyright (C) 2016 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
