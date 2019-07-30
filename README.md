@@ -3,20 +3,28 @@
 [![NPM package](https://img.shields.io/npm/v/xbash.svg?style=flat-square)](https://www.npmjs.com/package/xbash)
 [![License: MIT](https://img.shields.io/github/license/mortend/xbash.svg?style=flat-square)](LICENSE)
 
-> User-friendly and cross-platform bash command wrapper.
+> Friendly, portable wrappers of bash and curl.
 
 ## Install
 
 ```
-npm install xbash -g
+npm install xbash
 ```
+
+This will install `xbash` and `xcurl`.
 
 ## Usage
 
 ```js
-const xbash = require('./');
+const bash = require('xbash');
 
-xbash(['-c', 'echo Hello World!'], process.exit);
+bash(['-c', 'echo Hello World!'], process.exit);
+```
+
+```js
+const curl = require('xbash').curl;
+
+curl(['-L', 'https://npmjs.com'], process.exit);
 ```
 
 or, in Terminal:
@@ -24,7 +32,7 @@ or, in Terminal:
 ```
 $ xbash --version
 
-ERROR: Bash was not found. This can be solved by installing Git.
+ERROR: 'bash' was not found. This can be solved by installing Git.
 
 Please get Git from https://git-scm.com/downloads and try again.
 ```
@@ -40,6 +48,15 @@ License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 
 This is free software; you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
+```
+
+```
+$ xcurl --version
+
+curl 7.55.1 (Windows) libcurl/7.55.1 WinSSL
+Release-Date: [unreleased]
+Protocols: dict file ftp ftps http https imap imaps pop3 pop3s smtp smtps telnet tftp
+Features: AsynchDNS IPv6 Largefile SSPI Kerberos SPNEGO NTLM SSL
 ```
 
 ## Contributing
