@@ -3,6 +3,12 @@ const path = require('path');
 const which = require('which');
 const {spawn} = require('child_process');
 
+function error(name) {
+    console.error('ERROR: \'' + name + '\' was not found. This can be solved by installing Git.')
+    console.error("\nPlease get Git from https://git-scm.com/downloads and try again.");
+    process.exit(1);
+}
+
 function findBashForWindows() {
     let bash = which.sync('bash', {nothrow: true});
 
@@ -21,9 +27,7 @@ function findBashForWindows() {
             return bash;
     }
 
-    console.error('ERROR: \'bash\' was not found. This can be solved by installing Git.')
-    console.error("\nPlease get Git from https://git-scm.com/downloads and try again.");
-    process.exit(1);
+    error('bash');
 }
 
 function findCurlForWindows() {
@@ -44,9 +48,7 @@ function findCurlForWindows() {
             return curl;
     }
 
-    console.error('ERROR: \'curl\' was not found. This can be solved by installing Git.')
-    console.error("\nPlease get Git from https://git-scm.com/downloads and try again.");
-    process.exit(1);
+    error('curl');
 }
 
 let bash = 'bash';
