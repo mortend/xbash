@@ -13,6 +13,14 @@ npm install xbash
 
 This will install `xbash`, `xcurl` and `xunzip`.
 
+On Windows, these wrappers will look for your [Git for Windows] installation and run commands from there.
+
+If [Git for Windows] isn't found, and the commands aren't otherwise found, the wrappers will provide instructions on how to install this.
+
+Since [Git for Windows] is popular, this package gives you a reasonably portable way to use these commands, in JavaScript or from command-line.
+
+[Git for Windows]: https://git-scm.com/downloads
+
 ## Usage
 
 ```js
@@ -33,7 +41,7 @@ const unzip = require('xbash').unzip;
 unzip(['file.zip'], process.exit);
 ```
 
-or, in Terminal:
+or, from command-line:
 
 ```
 $ xbash --version
@@ -43,7 +51,7 @@ ERROR: 'bash' was not found. This can be solved by installing Git.
 Please get Git from https://git-scm.com/downloads and try again.
 ```
 
-After installing [Git for Windows](https://git-scm.com/downloads):
+After installing [Git for Windows].
 
 ```
 $ xbash --version
