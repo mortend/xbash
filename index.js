@@ -36,12 +36,12 @@ function findCurlForWindows() {
 
     if (git) {
         curl = path.join(path.dirname(path.dirname(git)), 'mingw', 'bin', 'curl.exe');
-        if (fs.existsSync(bash))
-            return bash;
+        if (fs.existsSync(curl))
+            return curl;
     } else {
         curl = path.join(process.env.PROGRAMFILES, 'Git', 'mingw', 'bin', 'curl.exe');
-        if (fs.existsSync(bash))
-            return bash;
+        if (fs.existsSync(curl))
+            return curl;
     }
 
     console.error('ERROR: \'curl\' was not found. This can be solved by installing Git.')
