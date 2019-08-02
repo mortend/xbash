@@ -3,7 +3,7 @@
 [![NPM package](https://img.shields.io/npm/v/xbash.svg?style=flat-square)](https://www.npmjs.com/package/xbash)
 [![License: MIT](https://img.shields.io/github/license/mortend/xbash.svg?style=flat-square)](LICENSE)
 
-> Friendly, portable wrappers of bash and curl.
+> Friendly, portable wrappers of bash, curl and unzip.
 
 ## Install
 
@@ -11,7 +11,7 @@
 npm install xbash
 ```
 
-This will install `xbash` and `xcurl`.
+This will install `xbash`, `xcurl` and `xunzip`.
 
 ## Usage
 
@@ -25,6 +25,12 @@ bash(['-c', 'echo Hello World!'], process.exit);
 const curl = require('xbash').curl;
 
 curl(['-L', 'https://npmjs.com'], process.exit);
+```
+
+```js
+const unzip = require('xbash').unzip;
+
+unzip(['file.zip'], process.exit);
 ```
 
 or, in Terminal:
@@ -57,6 +63,15 @@ curl 7.55.1 (Windows) libcurl/7.55.1 WinSSL
 Release-Date: [unreleased]
 Protocols: dict file ftp ftps http https imap imaps pop3 pop3s smtp smtps telnet tftp
 Features: AsynchDNS IPv6 Largefile SSPI Kerberos SPNEGO NTLM SSL
+```
+
+```
+$ xunzip
+
+UnZip 6.00 of 20 April 2009, by Info-ZIP.  Maintained by C. Spieler.  Send
+bug reports using http://www.info-zip.org/zip-bug.html; see README for details.
+
+[...]
 ```
 
 ## Contributing

@@ -45,15 +45,36 @@ function findCurlForWindows() {
         return curl;
 
     curl = which.sync('curl', {nothrow: true});
-
     if (curl)
         return curl;
 
     error('curl');
 }
 
+function findUnzipForWindows() {
+    let unzip = null;
+    let git = which.sync('git', {nothrow: true});
+
+    if (git) {
+        unzip = path.join(path.dirname(path.dirname(git)), 'usr', 'bin', 'unzip.exe');
+        if (fs.existsSync(bash))
+            return bash;
+    }
+    
+    unzip = path.join(process.env.PROGRAMFILES, 'Git', 'usr', 'bin', 'unzip.exe');
+    if (fs.existsSync(bash))
+        return bash;
+
+    unzip = which.sync('unzip', {nothrow: true});
+    if (unzip)
+        return unzip;
+
+    error('unzip');
+}
+
 let bash = 'bash';
 let curl = 'curl';
+let unzip = 'unzip';
 
 if (path.sep == '\\') {
     bash = findBashForWindows();
@@ -64,6 +85,11 @@ if (path.sep == '\\') {
     curl = findCurlForWindows();
     process.env.PATH = path.dirname(curl)
         .concat(path.delimiter, process.env.PATH);
+
+    // Make sure we have unzip in PATH inside bash.
+    unzip = findUnzipForWindows();
+    process.env.PATH = path.dirname(unzip)
+        .concat(path.delimiter, process.env.PATH);
 }
 
 module.exports = (args, callback) => 
@@ -73,5 +99,10 @@ module.exports = (args, callback) =>
 
 module.exports.curl = (args, callback) => 
     spawn(curl, args, {
+        stdio: 'inherit'
+    }).on('exit', callback);
+
+module.exports.unzip = (args, callback) => 
+    spawn(unzip, args, {
         stdio: 'inherit'
     }).on('exit', callback);
