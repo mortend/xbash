@@ -10,43 +10,44 @@ function error(name) {
 }
 
 function findBashForWindows() {
-    let bash = which.sync('bash', {nothrow: true});
-
-    if (bash)
-        return bash;
-
+    let bash = null;
     let git = which.sync('git', {nothrow: true});
 
     if (git) {
         bash = path.join(path.dirname(path.dirname(git)), 'usr', 'bin', 'bash.exe');
         if (fs.existsSync(bash))
             return bash;
-    } else {
-        bash = path.join(process.env.PROGRAMFILES, 'Git', 'usr', 'bin', 'bash.exe');
-        if (fs.existsSync(bash))
-            return bash;
     }
+    
+    bash = path.join(process.env.PROGRAMFILES, 'Git', 'usr', 'bin', 'bash.exe');
+    if (fs.existsSync(bash))
+        return bash;
+
+    bash = which.sync('bash', {nothrow: true});
+    if (bash)
+        return bash;
 
     error('bash');
 }
 
 function findCurlForWindows() {
-    let curl = which.sync('curl', {nothrow: true});
-
-    if (curl)
-        return curl;
-
+    let curl = null;
     let git = which.sync('git', {nothrow: true});
 
     if (git) {
         curl = path.join(path.dirname(path.dirname(git)), 'mingw', 'bin', 'curl.exe');
         if (fs.existsSync(curl))
             return curl;
-    } else {
-        curl = path.join(process.env.PROGRAMFILES, 'Git', 'mingw', 'bin', 'curl.exe');
-        if (fs.existsSync(curl))
-            return curl;
     }
+
+    curl = path.join(process.env.PROGRAMFILES, 'Git', 'mingw', 'bin', 'curl.exe');
+    if (fs.existsSync(curl))
+        return curl;
+
+    curl = which.sync('curl', {nothrow: true});
+
+    if (curl)
+        return curl;
 
     error('curl');
 }
