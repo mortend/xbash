@@ -6,7 +6,7 @@
     "which": "^1.3.1"
   },
   "bin": {
-    "xbash": "cli.js",
+    "xbash": "xbash.js",
     "xcurl": "xcurl.js",
     "xunzip": "xunzip.js"
   },
@@ -14,8 +14,8 @@
     "test": "node test.js && node xcurl.js -V && node xunzip.js"
   },
   "files": [
-    "cli.js",
     "index.js",
+    "xbash.js",
     "xcurl.js",
     "xunzip.js"
   ],
