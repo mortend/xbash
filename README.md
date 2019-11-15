@@ -65,10 +65,10 @@ Hello World!
 ```
 $ xbash -c 'curl --version'
 
-curl 7.55.1 (Windows) libcurl/7.55.1 WinSSL
-Release-Date: [unreleased]
-Protocols: dict file ftp ftps http https imap imaps pop3 pop3s smtp smtps telnet tftp
-Features: AsynchDNS IPv6 Largefile SSPI Kerberos SPNEGO NTLM SSL
+curl 7.65.1 (x86_64-w64-mingw32) libcurl/7.65.1 OpenSSL/1.1.1c (Schannel) zlib/1.2.11 libidn2/2.2.0 nghttp2/1.38.0
+Release-Date: 2019-06-05
+Protocols: dict file ftp ftps gopher http https imap imaps ldap ldaps pop3 pop3s rtsp smtp smtps telnet tftp
+Features: AsynchDNS HTTP2 HTTPS-proxy IDN IPv6 Kerberos Largefile libz Metalink MultiSSL NTLM SPNEGO SSL SSPI TLS-SRP
 ```
 
 ```
