@@ -3,7 +3,7 @@
 [![NPM package](https://img.shields.io/npm/v/xbash.svg?style=flat-square)](https://www.npmjs.com/package/xbash)
 [![License: MIT](https://img.shields.io/github/license/mortend/xbash.svg?style=flat-square)](LICENSE)
 
-> Friendly, portable wrappers of bash, curl and unzip.
+> Friendly, portable wrapper around `bash`.
 
 ## Install
 
@@ -11,13 +11,15 @@
 npm install xbash
 ```
 
-This will install `xbash`, `xcurl` and `xunzip`.
+This will install `xbash`, a cross-platform wrapper around `bash`.
 
-On Windows, these wrappers will look for your [Git for Windows] installation and run commands from there.
+The wrapper will make sure that also `curl` and `unzip` are available inside `bash`, making this package useful for developing [cross-platform installers](https://github.com/mortend/android-build-tools) among other things.
 
-If [Git for Windows] isn't found, and the commands aren't otherwise found, the wrappers will provide instructions on how to install this.
+* On Windows, the wrapper finds your [Git for Windows] installation and will prefer to run commands from there.
 
-Since [Git for Windows] is popular, this package gives you a reasonably portable way to use these commands, in JavaScript or from command-line.
+* If a [Git for Windows] installation isn't found, and all mentioned commands aren't otherwise found, the wrapper will provide instructions on how to install [Git for Windows].
+
+* Since [Git for Windows] is popular, this package gives you a reasonably portable way to use these commands, in JavaScript or from command-line.
 
 [Git for Windows]: https://git-scm.com/downloads
 
@@ -27,18 +29,6 @@ Since [Git for Windows] is popular, this package gives you a reasonably portable
 const bash = require('xbash');
 
 bash(['-c', 'echo Hello World!'], process.exit);
-```
-
-```js
-const curl = require('xbash').curl;
-
-curl(['-L', 'https://npmjs.com'], process.exit);
-```
-
-```js
-const unzip = require('xbash').unzip;
-
-unzip(['file.zip'], process.exit);
 ```
 
 or, from command-line:
@@ -51,7 +41,7 @@ ERROR: 'bash' was not found. This can be solved by installing Git.
 Please get Git from https://git-scm.com/downloads and try again.
 ```
 
-After installing [Git for Windows].
+This happens when `bash` was not found. Running again after installing [Git for Windows].
 
 ```
 $ xbash --version
@@ -64,8 +54,16 @@ This is free software; you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 ```
 
+We can use `xbash` to run scripts, or to invoke other commands.
+
 ```
-$ xcurl --version
+$ xbash script.bash
+
+Hello World!
+```
+
+```
+$ xbash -c 'curl --version'
 
 curl 7.55.1 (Windows) libcurl/7.55.1 WinSSL
 Release-Date: [unreleased]
@@ -74,7 +72,7 @@ Features: AsynchDNS IPv6 Largefile SSPI Kerberos SPNEGO NTLM SSL
 ```
 
 ```
-$ xunzip
+$ xbash -c 'unzip'
 
 UnZip 6.00 of 20 April 2009, by Info-ZIP.  Maintained by C. Spieler.  Send
 bug reports using http://www.info-zip.org/zip-bug.html; see README for details.
