@@ -44,7 +44,7 @@ function addExeToPATH(exe) {
 
     // Early-out if exe already is in PATH.
     const exeInPATH = which.sync(name, {nothrow: true});
-    if (exe.toLowerCase() == exeInPATH.toLowerCase())
+    if (exeInPATH && exe.toLowerCase() == exeInPATH.toLowerCase())
         return;
 
     // Prepend directory to PATH.
