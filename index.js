@@ -52,7 +52,7 @@ function addExeToPATH(exe) {
         .concat(path.delimiter, process.env.PATH);
 }
 
-let bash = 'bash';
+let bash = '/bin/bash';
 
 if (path.sep == '\\') {
     bash = findGitForWindowsExe('bash.exe');
