@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-const xbash = require('.');
+const bash = require('.');
 
-xbash(process.argv.splice(2), process.exit);
+bash(process.argv.splice(2), process.exit);

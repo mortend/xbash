@@ -1,3 +1,3 @@
-const xbash = require('./');
+const bash = require('.');
 
-xbash(['-c', 'echo Hello World!'], process.exit);
+bash(['-c', 'echo Hello World!'], process.exit);
