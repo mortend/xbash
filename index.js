@@ -28,6 +28,10 @@ function findGitForWindowsExe(name) {
         exe = path.join(process.env.PROGRAMFILES, 'Git', dir, name);
         if (fs.existsSync(exe))
             return exe;
+
+        exe = path.join(process.env.PROGRAMW6432, 'Git', dir, name);
+        if (fs.existsSync(exe))
+            return exe;
     }
 
     exe = which.sync(name, {nothrow: true});
