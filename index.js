@@ -70,7 +70,8 @@ function getBash() {
     return bash;
 }
 
-module.exports = (args, callback) => 
+module.exports = (args, callback) => {
     spawn(getBash(), args, {
         stdio: 'inherit'
     }).on('exit', callback);
+};
