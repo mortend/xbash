@@ -54,10 +54,11 @@ function addExeToPATH(exe) {
         .concat(path.delimiter, process.env.PATH);
 }
 
-let bash = '/bin/bash';
+function getBash() {
+    if (path.sep != '\\')
+        return '/bin/bash';
 
-if (path.sep == '\\') {
-    bash = findGitForWindowsExe('bash.exe');
+    const bash = findGitForWindowsExe('bash.exe');
 
     // Make sure we also have 'curl' and 'unzip' available inside 'bash'.
     // The reason for this is that this package was extracted from another
@@ -66,9 +67,10 @@ if (path.sep == '\\') {
     addExeToPATH(findGitForWindowsExe('curl.exe'));
     addExeToPATH(findGitForWindowsExe('unzip.exe'));
     addExeToPATH(bash);
+    return bash;
 }
 
 module.exports = (args, callback) => 
-    spawn(bash, args, {
+    spawn(getBash(), args, {
         stdio: 'inherit'
     }).on('exit', callback);
