@@ -3,44 +3,42 @@ const path = require('path');
 const which = require('which');
 const {spawn} = require('child_process');
 
+function error(name) {
+    console.error('ERROR: \'' + name + '\' was not found. This can be solved by installing Git.')
+    console.error("\nPlease get Git from https://git-scm.com/downloads and try again.\n");
+    process.exit(1);
+}
+
 function findGitForWindowsExe(name) {
-    // Places to look for .exe files inside a Git installation.
+    // Places to look for exe-files inside a Git installation.
     const gitBinDirs = [
         path.join('mingw', 'bin'),
         path.join('mingw64', 'bin'),
         path.join('usr', 'bin')
     ];
 
-    const git = which.sync('git', {nothrow: true});
-    let exe = null;
+    const gitExes = which.sync('git', {
+        all: true,
+        nothrow: true
+    }) || [];
 
-    if (git) {
-        for (let i = 0; i < gitBinDirs.length; i++) {
-            const dir = gitBinDirs[i];
-            exe = path.join(path.dirname(path.dirname(git)), dir, name);
+    // Default installation locations.
+    gitExes.push(path.join(process.env.PROGRAMFILES, 'Git', 'cmd', 'git.exe'));
+    gitExes.push(path.join(process.env.PROGRAMW6432, 'Git', 'cmd', 'git.exe'));
+
+    for (git of gitExes) {
+        for (dir of gitBinDirs) {
+            const exe = path.join(path.dirname(path.dirname(git)), dir, name);
             if (fs.existsSync(exe))
                 return exe;
         }
     }
 
-    for (let i = 0; i < gitBinDirs.length; i++) {
-        const dir = gitBinDirs[i];
-        exe = path.join(process.env.PROGRAMFILES, 'Git', dir, name);
-        if (fs.existsSync(exe))
-            return exe;
-
-        exe = path.join(process.env.PROGRAMW6432, 'Git', dir, name);
-        if (fs.existsSync(exe))
-            return exe;
-    }
-
-    exe = which.sync(name, {nothrow: true});
-    if (exe)
-        return exe;
-
-    console.error('ERROR: \'' + name + '\' was not found. This can be solved by installing Git.')
-    console.error("\nPlease get Git from https://git-scm.com/downloads and try again.");
-    process.exit(1);
+    // Look for exe-file in PATH or report error.
+    // (We avoid script-recursion becuase we are specifically looking for exe-files.)
+    return which.sync(name, {
+        nothrow: true
+    }) || error(name);
 }
 
 function addExeToPATH(exe) {
