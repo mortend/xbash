@@ -54,10 +54,7 @@ function addExeToPATH(exe) {
         .concat(path.delimiter, process.env.PATH);
 }
 
-function getBash() {
-    if (path.sep != '\\')
-        return '/bin/bash';
-
+function getBashForWindows() {
     const bash = findGitForWindowsExe('bash.exe');
 
     // Make sure we also have 'curl' and 'unzip' available inside 'bash'.
@@ -68,6 +65,27 @@ function getBash() {
     addExeToPATH(findGitForWindowsExe('unzip.exe'));
     addExeToPATH(bash);
     return bash;
+}
+
+function getBashForUnix() {
+    for (const bash of which.sync('bash', {
+        all: true,
+        nothrow: true
+    }) || []) {
+        // Skip paths containing '/node_modules/' to avoid invoking ourself,
+        // since that would only result in infinite recursion.
+        if (bash.indexOf("/node_modules/") === -1)
+            return bash;
+    }
+
+    // This means 'bash' wasn't found by 'which' (shouldn't happen).
+    return "/bin/bash";
+}
+
+function getBash() {
+    return path.sep == '\\'
+        ? getBashForWindows()
+        : getBashForUnix();
 }
 
 module.exports = (args, callback) => {
