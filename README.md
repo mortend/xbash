@@ -1,7 +1,7 @@
 # xbash
 
 [![NPM package](https://img.shields.io/npm/v/xbash.svg?style=flat-square)](https://www.npmjs.com/package/xbash)
-[![NPM downloads](https://img.shields.io/npm/dt/xbash?color=blue&style=flat-square)](https://www.npmjs.com/package/dotnet-run)
+[![NPM downloads](https://img.shields.io/npm/dt/xbash?color=blue&style=flat-square)](https://www.npmjs.com/package/xbash)
 [![License: MIT](https://img.shields.io/github/license/mortend/xbash.svg?style=flat-square)](LICENSE)
 
 > Friendly, portable wrapper around `bash`.
